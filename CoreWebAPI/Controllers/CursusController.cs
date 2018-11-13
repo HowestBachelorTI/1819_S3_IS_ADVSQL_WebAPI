@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using CoreWebAPI.Data;
-using CoreWebAPI.Helpers;
 using CoreWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +12,10 @@ namespace CoreWebAPI.Controllers
 
 
         SqlConnection conn = new SqlConnection(
-@"Data Source=.\sqlexpress;
-                      Database=School;
-                      Integrated security=true;"
-);
+                                    @"Data Source=.\sqlexpress;
+                                                          Database=School;
+                                                          Integrated security=true;"
+                                    );
 
         public IActionResult Get()
         {
@@ -55,9 +52,5 @@ namespace CoreWebAPI.Controllers
             }
             return Ok(Cursussen);
         }
-
-
-        
-
     }
 }

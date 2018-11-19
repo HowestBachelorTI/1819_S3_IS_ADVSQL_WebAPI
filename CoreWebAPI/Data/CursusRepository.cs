@@ -1,5 +1,5 @@
-﻿using CoreWebAPI.Helpers;
-using CoreWebAPI.Models;
+﻿using CoreWebAPI.Models;
+using DataHelpers.Lib;
 using System;
 using System.Collections.Generic;
 using System.Data;

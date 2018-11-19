@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using CoreWebAPI.Data;
-using CoreWebAPI.Helpers;
 using CoreWebAPI.Models;
+using DataHelpers.Lib;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreWebAPI.Controllers

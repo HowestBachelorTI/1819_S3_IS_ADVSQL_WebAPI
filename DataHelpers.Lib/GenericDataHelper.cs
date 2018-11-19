@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace CoreWebAPI.Helpers
+namespace DataHelpers.Lib
 {
     public abstract class GenericDataHelper<T>
     {

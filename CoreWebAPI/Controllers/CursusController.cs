@@ -12,12 +12,12 @@ namespace CoreWebAPI.Controllers
     [ApiController]
     public class CursusController : ControllerBase
     {
-        CursusData _cursusData;
+        private CursusRepository _cursusRepository;
         public CursusController()
         {
-            _cursusData = new CursusData(
-                                new SqlHelper(
-                                    new SqlConnection(@"Data Source=.\sqlexpress;
+            _cursusRepository = new CursusRepository(
+                                    new SqlHelper(
+                                        new SqlConnection(@"Data Source=.\sqlexpress;
                                             Database=School;
                                             Integrated security=true;"
                                                        )));
@@ -25,46 +25,39 @@ namespace CoreWebAPI.Controllers
 
         public IActionResult Get()
         {
-            List<Cursus> Cursussen = new List<Cursus>();
             try
             {
-                Cursussen = _cursusData.ConvertToList("Select * from cursussen");
+                return Ok(_cursusRepository.Get());
             }
             catch { return BadRequest(); }
-            return Ok(Cursussen);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Cursus cursus = null;
             try
             {
-                SqlParameter param = new SqlParameter("@cursusnr", id);
-                cursus = _cursusData.ConvertToEntity("Select * from cursussen where cursusnr = @cursusnr", param);
+                Cursus cursus = _cursusRepository.GetById(id);
+                if (cursus != null)
+                    return Ok(cursus);
+                else return NotFound();
             }
-            catch { return BadRequest(); }
-
-            if (cursus != null)
-                return Ok(cursus);
-            else return NotFound();
+            catch { return BadRequest(); }    
         }
 
         [HttpGet("{naamBevat}/{maxInschrijvingsgeld}")]
         public IActionResult GetByNaamEnInschrijvingsgeld(string naamBevat, int maxInschrijvingsgeld)
-        {
-            List<Cursus> cursus = null;
+        {         
             try
-            {             
-                SqlParameter pNaam = new SqlParameter("@naambevat", naamBevat);
-                SqlParameter pInschrijving = new SqlParameter("@maxInschrijvingsgeld", maxInschrijvingsgeld);
-                cursus = _cursusData.ConvertToList("getCursussen", CommandType.StoredProcedure, pNaam, pInschrijving);
+            {
+                List<Cursus> cursussen = _cursusRepository.GetByNaamEnInschrijvingsgeld(naamBevat, maxInschrijvingsgeld);
+                if (cursussen.Count > 0)
+                    return Ok(cursussen);
+                else return NotFound();
             }
             catch { return BadRequest(); }
 
-            if (cursus != null)
-                return Ok(cursus);
-            else return NotFound();
+            
         }
 
     }

@@ -6,7 +6,7 @@ namespace CoreWebAPI.Helpers
 {
     public abstract class GenericDataHelper<T>
     {
-        private SqlHelper _sqlHelper;
+        protected SqlHelper _sqlHelper;
         public GenericDataHelper(SqlHelper sqlhelper)
         {
             _sqlHelper = sqlhelper;
@@ -44,7 +44,6 @@ namespace CoreWebAPI.Helpers
             DataTable table = _sqlHelper.LoadDataTable(sql, type, parameters);
             return ConvertToList(table);
         }
-
 
         public T ConvertToEntity(string sql)
         {

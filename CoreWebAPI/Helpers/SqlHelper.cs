@@ -53,8 +53,6 @@ namespace CoreWebAPI.Helpers
                 if (_conn != null) _conn.Close();
             }
             return table;
-        }
-
-        
+        }     
     }
 }

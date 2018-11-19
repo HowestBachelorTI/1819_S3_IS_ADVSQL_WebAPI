@@ -1,6 +1,6 @@
 ﻿
 (function () {
-    var apiURL = 'api/cursus';
+    const apiURL = 'api/cursus';
 
     window.addEventListener('load', function () {     
         let cursusDetail = document.getElementById('cursussen');

@@ -51,6 +51,7 @@
         return `${cursus.cursusnaam} (${cursus.id}): ${cursus.inschrijvingsgeld}`;
     }
 
+
 }());
 
 

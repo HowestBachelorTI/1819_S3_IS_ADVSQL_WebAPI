@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CoreWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace CoreWebAPI.Controllers
@@ -13,15 +13,12 @@ namespace CoreWebAPI.Controllers
         public IActionResult Get()
         {
             MongoCredential credential = MongoCredential.CreateCredential("Restaurants", "howest", "howest");
-            MongoClientSettings settings =
-                new MongoClientSettings { Credential = credential };
+            MongoClientSettings settings = new MongoClientSettings { Credential = credential };
             MongoClient mongoClient = new MongoClient(settings);
             IMongoDatabase db = mongoClient.GetDatabase("Restaurants");
-            IMongoCollection<BsonDocument> collection =
-                db.GetCollection<BsonDocument>("Restaurants");
-            FilterDefinition<BsonDocument> filter =
-                FilterDefinition<BsonDocument>.Empty;
-            List<BsonDocument> restaurants = collection.Find(filter).ToList();
+            IMongoCollection<Restaurant> collection = db.GetCollection<Restaurant>("Restaurants");
+            FilterDefinition<Restaurant> filter = FilterDefinition<Restaurant>.Empty;
+            List<Restaurant> restaurants = collection.Find(filter).ToList();
             try
             {
                 return Ok(restaurants);
